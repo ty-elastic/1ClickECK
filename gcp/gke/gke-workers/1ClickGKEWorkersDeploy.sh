@@ -52,3 +52,6 @@ echo "1ClickGKEDeploy.sh: Building util node pool"
 
 echo "1ClickGKEDeploy.sh: Building otel node pool"
 (cd ./otel; bash ./1ClickGKEOtelDeploy.sh)
+
+echo "1ClickGKEBucketDeploy.sh: Creating bucket"
+(cd ./bucket; bash ./1ClickGKEBucketDeploy.sh)

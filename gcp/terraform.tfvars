@@ -19,7 +19,7 @@ tags = {
     "division" = "field"
     "org" = "sa"
     "team" = "amer-strat"
-    "project" = "username" # Project name (shared) or username (individual)
+    "project" = "tb1" # Project name (shared) or username (individual)
     "keep-until" = " 2024-12-31" #yyyy-mm-dd
 }
 
@@ -27,7 +27,7 @@ tags = {
 region= "us-central1"
 zones= ["us-central1-a", "us-central1-b", "us-central1-c"]
 
-gcp_project="CHANGE-ME"
+gcp_project="elastic-sa"
 
 
 #----------------------- Cloud Provider ----------------------------------------
@@ -44,11 +44,11 @@ gcp_project="CHANGE-ME"
 
 #release_channel= "STABLE"
 
-#gke_version="1.27." ##must have dot after major release number as the automation fetches minor version
+gke_version="1.27." ##must have dot after major release number as the automation fetches minor version
 
 #gke_auto_upgrade=true
 #gke_auto_repair=false
-#gke_image_type="UBUNTU_CONTAINERD"
+gke_image_type="cos_containerd"
 
 
 
@@ -58,7 +58,7 @@ gcp_project="CHANGE-ME"
 
 #----------------------- Helm --------------------------------
 ##run helm search repo elastic to find chart version
-#es_operator_chart_version= "2.13.0"
+es_operator_chart_version= "2.13.0"
 
 
 #----------------------- Kubernetes Environment --------------------------------
@@ -70,28 +70,28 @@ gcp_project="CHANGE-ME"
 # This determines the hardware footprint, or billiable size, of the deployment.
 
 
-#master_initial_node_count_per_zone=1
-#master_instance_count_per_zone=1
+master_initial_node_count_per_zone=1
+master_instance_count_per_zone=1
 #master_instance_k8s_label= {"nodetype"="master"}
-#master_instance_type= "n2-standard-8"
-#master_max_instance_count_per_zone=10
+master_instance_type= "c3-highcpu-8"
+master_max_instance_count_per_zone=1
 #master_surge_count=10
 #master_volume_type= "pd-ssd"
 #master_accept_ingest=false
 #master_accept_search=false
 
 
-#kibana_instance_count=1
+kibana_instance_count=1
 #kibana_instance_k8s_label= {"nodetype"="kibana"}
-#kibana_instance_type= ""
+kibana_instance_type= "c3-highcpu-8"
 #kibana_volume_type= "pd-ssd"
 
 
-#hot_initial_node_count_per_zone=2
-#hot_instance_count_per_zone=2
+hot_initial_node_count_per_zone=3
+hot_instance_count_per_zone=3
 #hot_instance_k8s_label= {"nodetype"="hot"}
-#hot_instance_type=  "n2-standard-32"
-#hot_max_instance_count_per_zone=10
+hot_instance_type=  "n2-custom-32-73728"
+#hot_max_instance_count_per_zone=30
 #hot_surge_count=10
 #hot_volume_type= "pd-ssd"
 #hot_accept_ingest=true
@@ -109,11 +109,11 @@ gcp_project="CHANGE-ME"
 #warm_accept_search=false
 #warm_local_ssd_count = 0
 
-#cold_initial_node_count_per_zone=1
-#cold_instance_count_per_zone=1
+cold_initial_node_count_per_zone=3
+cold_instance_count_per_zone=3
 #cold_instance_k8s_label= {"nodetype"="cold"}
-#cold_instance_type= ""
-#cold_max_instance_count_per_zone=10
+cold_instance_type= "n2-standard-16"
+cold_max_instance_count_per_zone=3
 #cold_surge_count=10
 #cold_volume_type= "pd-ssd"
 #cold_accept_ingest=false
@@ -121,29 +121,29 @@ gcp_project="CHANGE-ME"
 #cold_local_ssd_count = 0
 
 
-#frozen_initial_node_count_per_zone=1
-#frozen_instance_count_per_zone=1
+frozen_initial_node_count_per_zone=3
+frozen_instance_count_per_zone=3
 #frozen_instance_k8s_label= {"nodetype"="frozen"}
-#frozen_instance_type= ""
-#frozen_max_instance_count_per_zone=10
+frozen_instance_type= "n2-standard-16"
+frozen_max_instance_count_per_zone=3
 #frozen_surge_count=10
 #frozen_volume_type= "pd-ssd"
 #frozen_accept_ingest=false
 #frozen_accept_search=false
 #frozen_local_ssd_count = 0
 
-#ml_initial_node_count_per_zone=1
-#ml_instance_count_per_zone=1
+ml_initial_node_count_per_zone=1
+ml_instance_count_per_zone=1
 #ml_instance_k8s_label= {"nodetype"="ml"}
-#ml_instance_type= "crazyinstancetype"
-#ml_max_instance_count_per_zone=10
+ml_instance_type= "n2-custom-32-73728"
+ml_max_instance_count_per_zone=1
 #ml_surge_count=10
 #ml_volume_type= "pd-ssd"
 #ml_accept_ingest=false
 #ml_accept_search=false
 #ml_local_ssd_count = 1
 
-# logstash_instance_count = 0
+logstash_instance_count = 0
 # logstash_instance_type= "e2-standard-32"
 # logstash_local_ssd_count = 0
 # logstash_instance_k8s_label= {"nodetype"="logstash"}
@@ -151,7 +151,7 @@ gcp_project="CHANGE-ME"
 # logstash_volume_type= "pd-ssd"
 
 
-#entsearch_instance_count = 3
+entsearch_instance_count = 0
 #entsearch_instance_type= "n2-standard-32"
 #entsearch_instance_k8s_label = {"nodetype"="entsearch"}
 #entsearch_volume = 500
@@ -159,9 +159,9 @@ gcp_project="CHANGE-ME"
 #entsearch_local_ssd_count = 1
 
 
-#fleet_instance_count=1
+fleet_instance_count=0
 #fleet_instance_k8s_label= {"nodetype"="fleet"}
-#fleet_instance_type= "e2-standard-8"
+fleet_instance_type= "c3-highcpu-8"
 #fleet_volume_type= "pd-ssd"
 
 
@@ -180,7 +180,7 @@ gcp_project="CHANGE-ME"
 
 #----------------------- Elastic Cloud Kubernetes ------------------------------
 
-#eck_version= "2.9.0"
+eck_version= "2.13.0"
 #eck_namespace= "default"
 
 #----------------------- Elasticsearch Cluster ---------------------------------
@@ -189,22 +189,22 @@ gcp_project="CHANGE-ME"
 # Kubernetes pod. The total pod count will be distributed across the k8s
 # instances in the regions defined above.
 
-#es_version= "8.9.1"
+es_version= "8.14.0"
 
 #master_pod_ES_JAVA_OPTS= "-Xms8g -Xmx8g"
-#master_pod_count= 3
-#master_pod_cpu= "6500m"
-#master_pod_memory= "11264Mi"
+master_pod_count= 3
+master_pod_cpu= "7000m"
+master_pod_memory= "12Gi"
 #master_pod_roles= "master, remote_cluster_client"
 #master_pod_storage= "140Gi"
 #master_pod_storage_class = "premium-rwo"
 
 #hot_pod_ES_JAVA_OPTS= "-Xms8g -Xmx8g"
-#hot_pod_count= 3
-#hot_pod_cpu= "30000m"
-#hot_pod_memory= "53248Mi"
+hot_pod_count= 9
+hot_pod_cpu= "31000m"
+hot_pod_memory= "64Gi"
 #hot_pod_roles= "data_hot, data_content, ingest, remote_cluster_client"
-#hot_pod_storage= "1600Gi"
+hot_pod_storage= "2800Gi"
 #hot_pod_storage_class = "premium-rwo"
 
 #warm_pod_ES_JAVA_OPTS= "-Xms8g -Xmx8g"
@@ -216,35 +216,35 @@ gcp_project="CHANGE-ME"
 #warm_pod_storage_class = "premium-rwo"
 
 #cold_pod_ES_JAVA_OPTS= "-Xms8g -Xmx8g"
-#cold_pod_count= 0
-#cold_pod_cpu= "46000m"
-#cold_pod_memory= "11264Mi"
+cold_pod_count= 9
+cold_pod_cpu= "15000m"
+cold_pod_memory= "56Gi"
 #cold_pod_roles= "data_cold, remote_cluster_client"
-#cold_pod_storage= "140Gi"
+cold_pod_storage= "12165Gi"
 #cold_pod_storage_class = "premium-rwo"
 
 #frozen_pod_ES_JAVA_OPTS= "-Xms8g -Xmx8g"
-#frozen_pod_count= 0
-#frozen_pod_cpu= "94000m"
-#frozen_pod_memory= "11264Mi"
+frozen_pod_count= 9
+frozen_pod_cpu= "15000m"
+frozen_pod_memory= "56Gi"
 #frozen_pod_roles= "data_frozen, remote_cluster_client"
-#frozen_pod_storage= "140Gi"
+frozen_pod_storage= "5765Gi"
 #frozen_pod_storage_class = "premium-rwo"
 
 #ml_pod_ES_JAVA_OPTS= "-Xms8g -Xmx8g"
-#ml_pod_count= 1
-#ml_pod_cpu= "14000m"
-#ml_pod_memory= "11264Mi"
+ml_pod_count= 3
+ml_pod_cpu= "31000m"
+ml_pod_memory= "64Gi"
 #ml_pod_roles= "ml, remote_cluster_client"
 #ml_pod_storage= "140Gi"
 #ml_pod_storage_class = "premium-rwo"
 
-#kibana_pod_count= 1
-#kibana_pod_cpu= "1000m"
-#kibana_pod_memory= "1Gi"
+kibana_pod_count= 1
+kibana_pod_cpu= "6000m"
+kibana_pod_memory= "11Gi"
 
 
-#entsearch_pod_count = 1
+entsearch_pod_count = 0
 #entsearch_pod_cpu = "4"
 #entsearch_pod_memory = "20Gi"
 #entsearch_pod_storage = "200Gi"
@@ -254,10 +254,10 @@ gcp_project="CHANGE-ME"
 #entsearch_pod_storage_class = "premium-rwo"
 
 
+fleet_pod_count= 0
+fleet_pod_cpu= "6000m"
+fleet_pod_memory = "11Gi"
 
-#fleet_pod_cpu= "4"
-#fleet_pod_memory = "20Gi"
-#fleet_pod_count= 1
 
 
 

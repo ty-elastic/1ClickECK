@@ -35,3 +35,6 @@ echo "1ClickGKEDestroy.sh: destroying util node pool"
 
 echo "1ClickGKEDestroy.sh: destroying otel node pool"
 (cd ./otel; bash ./1ClickGKEOtelDestroy.sh)
+
+echo "1ClickGKEBucketDestroy.sh: destroying bucket"
+(cd ./bucket; bash ./1ClickGKEBucketDestroy.sh)

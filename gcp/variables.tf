@@ -1198,3 +1198,8 @@ variable "es_apm_url" {
   type = string
   default = ""
 }
+
+variable "bucket_region" {
+  description = "bucket storage region"
+  default = "US"
+}
