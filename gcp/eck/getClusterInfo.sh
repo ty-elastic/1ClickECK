@@ -139,6 +139,9 @@ kurl_search=$(kubectl get service eck-search-es-http-endpoint | tail -n -1 | awk
 set -- `ipsplit $kurl_search`
 k3=$4.$3.$2.$1
 
+source snapshots/snapshots.sh
+source apikey/apikey.sh
+
 # Display information
 echo "================================================="
 echo "                     Cluster Info"

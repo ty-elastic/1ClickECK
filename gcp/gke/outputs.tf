@@ -21,3 +21,7 @@ output "gke_cluster_id" {
 output "gcp_service_account_email" {
   value = google_service_account.kubernetes.email
 }
+
+output "clustername_abbreviated" {
+  value = lower(replace(google_container_cluster.k8s.name, "-", ""))
+}

@@ -10,3 +10,6 @@ output "fleet_pod" {
 output "fleet_instance" {
   value = var.fleet_instance_count
 }
+output "clustername_abbreviated" {
+  value = lower(replace(data.terraform_remote_state.k8s.outputs.cluster_name, "-", ""))
+}

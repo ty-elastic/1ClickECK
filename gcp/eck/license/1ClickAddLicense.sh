@@ -20,6 +20,7 @@ echo ...
 echo ...
 if test -f ./es-license.json; then
   echo license file found
+  kubectl delete secret eck-license -n elastic-system --ignore-not-found
   kubectl create secret generic eck-license --from-file=./es-license.json -n elastic-system
   kubectl label secret eck-license "license.k8s.elastic.co/scope"=operator -n elastic-system
 else

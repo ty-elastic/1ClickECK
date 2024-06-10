@@ -62,6 +62,12 @@ variable "gke_service_range_cidr" {
   default     = "10.52.0.0/20"
 }
 
+variable "gke_egress_nat_addresses" {
+  description = "# of Cloud NAT egress IP addresses"
+  type        = number
+  default     = 1
+}
+
 
 variable "gke_http_load_balancing_disabled" {
   description = "http load balancing disabled"
@@ -214,7 +220,7 @@ variable "master_volume" {
 variable "master_volume_type" {
   description = "disk type"
   type        = string
-  default     = "pd-ssd"
+  default     = "pd-balanced"
 }
 
 
@@ -247,13 +253,13 @@ variable "kibana_instance_k8s_label" {
 variable "kibana_volume" {
   description = "Volume in GB"
   type        = number
-  default     = 2000
+  default     = 100
 }
 
 variable "kibana_volume_type" {
   description = "disk type"
   type        = string
-  default     = "pd-ssd"
+  default     = "pd-balanced"
 }
 
 
@@ -296,13 +302,13 @@ variable "hot_instance_k8s_label" {
 variable "hot_volume" {
   description = "Volume in GB"
   type        = number
-  default     = 2000
+  default     = 100
 }
 
 variable "hot_volume_type" {
   description = "disk type"
   type        = string
-  default     = "pd-ssd"
+  default     = "pd-balanced"
 }
 
 variable "hot_local_ssd_count" {
@@ -363,7 +369,7 @@ variable "warm_volume" {
 variable "warm_volume_type" {
   description = "disk type"
   type        = string
-  default     = "pd-ssd"
+  default     = "pd-balanced"
 }
 
 
@@ -418,7 +424,7 @@ variable "cold_volume" {
 variable "cold_volume_type" {
   description = "disk type"
   type        = string
-  default     = "pd-ssd"
+  default     = "pd-balanced"
 }
 
 
@@ -474,7 +480,7 @@ variable "frozen_volume" {
 variable "frozen_volume_type" {
   description = "disk type"
   type        = string
-  default     = "pd-ssd"
+  default     = "pd-balanced"
 }
 
 
@@ -524,13 +530,13 @@ variable "ml_instance_k8s_label" {
 variable "ml_volume" {
   description = "Volume in GB"
   type        = number
-  default     = 2000
+  default     = 100
 }
 
 variable "ml_volume_type" {
   description = "disk type"
   type        = string
-  default     = "pd-ssd"
+  default     = "pd-balanced"
 }
 
 
@@ -569,7 +575,7 @@ variable "entsearch_volume" {
 variable "entsearch_volume_type" {
   description = "disk type"
   type        = string
-  default     = "pd-ssd"
+  default     = "pd-balanced"
 }
 
 
@@ -608,7 +614,7 @@ variable "fleet_volume" {
 variable "fleet_volume_type" {
   description = "disk type"
   type        = string
-  default     = "pd-ssd"
+  default     = "pd-balanced"
 }
 
 
@@ -640,13 +646,13 @@ variable "otel_instance_k8s_label" {
 variable "otel_volume" {
   description = "Volume in GB"
   type        = number
-  default     = 2000
+  default     = 100
 }
 
 variable "otel_volume_type" {
   description = "disk type"
   type        = string
-  default     = "pd-ssd"
+  default     = "pd-balanced"
 }
 
 
@@ -683,7 +689,7 @@ variable "util_volume" {
 variable "util_volume_type" {
   description = "disk type"
   type        = string
-  default     = "pd-ssd"
+  default     = "pd-balanced"
 }
 
 variable "logstash_instance_count" {
@@ -719,7 +725,7 @@ variable "logstash_volume" {
 variable "logstash_volume_type" {
   description = "disk type"
   type        = string
-  default     = "pd-ssd"
+  default     = "pd-balanced"
 }
 
 
@@ -1195,6 +1201,30 @@ variable "es_apm_token" {
 
 variable "es_apm_url" {
   description = "ElasticSearch APM URL"
+  type = string
+  default = ""
+}
+
+variable "bucket_region" {
+  description = "bucket storage region"
+  type = string
+  default = "US"
+}
+
+variable "es_monitoring_cluster_url" {
+  description = "URL of external ES monitoring cluster"
+  type = string
+  default = ""
+}
+
+variable "es_monitoring_cluster_username" {
+  description = "username for external ES monitoring cluster"
+  type = string
+  default = ""
+}
+
+variable "es_monitoring_cluster_password" {
+  description = "password for external ES monitoring cluster"
   type = string
   default = ""
 }

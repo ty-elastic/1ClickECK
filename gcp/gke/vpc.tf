@@ -44,12 +44,14 @@ resource "google_compute_router_nat" "nat" {
     source_ip_ranges_to_nat = ["ALL_IP_RANGES"]
   }
 
-  nat_ips = [google_compute_address.nat.self_link]
+  nat_ips = google_compute_address.nat.*.self_link
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_address
 resource "google_compute_address" "nat" {
-  name         = lower(replace("${random_pet.name.id}-nat", "-", ""))
+  # gcp has a Clound NAT limit of 50 hosts per IP
+  count        = var.gke_egress_nat_addresses >= 1 ? var.gke_egress_nat_addresses : 1
+  name         = lower(replace("${random_pet.name.id}-nat-${count.index}", "-", ""))
   address_type = "EXTERNAL"
   network_tier = "PREMIUM"
 

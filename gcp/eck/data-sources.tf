@@ -9,6 +9,10 @@ data "terraform_remote_state" "k8s" {
 data "kubectl_path_documents" "es" {
     pattern = "./eck-yamls/es.yaml"
     vars = {
+        es_monitoring_cluster_url = var.es_monitoring_cluster_url
+        es_monitoring_cluster_username = var.es_monitoring_cluster_username
+        es_monitoring_cluster_password = var.es_monitoring_cluster_password
+
         es_version = var.es_version
         eck_namespace = var.eck_namespace
         master_pod_ES_JAVA_OPTS = var.master_pod_ES_JAVA_OPTS
@@ -110,6 +114,10 @@ data "kubectl_path_documents" "kibana-count" {
 data "kubectl_path_documents" "es-count" {
   pattern = "./eck-yamls/es.yaml"
   vars = {
+        es_monitoring_cluster_url = var.es_monitoring_cluster_url
+        es_monitoring_cluster_username = var.es_monitoring_cluster_username
+        es_monitoring_cluster_password = var.es_monitoring_cluster_password
+
         es_version = ""
         eck_namespace = ""
         master_pod_ES_JAVA_OPTS = ""

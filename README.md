@@ -24,6 +24,7 @@ ElasticKonductor currently deploys
 [![2023-06-28-21-54-31.jpg](https://i.postimg.cc/pd5qQBNj/2023-06-28-21-54-31.jpg)](https://postimg.cc/Z9Z84p5Y)
 
 
+[![Konductor.png](Konductor.png)](Konductor.png)
 
 
 ## Prerequisites
